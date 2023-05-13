@@ -1,0 +1,58 @@
+// This source code is subject to the terms of the Mozilla Public License 2.0 at https://mozilla.org/MPL/2.0/
+// © LvNThL
+
+//@version=5
+indicator("Triple RSI", overlay = false)
+
+ma1(source1, length1, type) =>
+    switch type
+        "SMA" => ta.sma(source1, length1)
+        "EMA" => ta.ema(source1, length1)
+        "SMMA (RMA)" => ta.rma(source1, length1)
+        "WMA" => ta.wma(source1, length1)
+        "VWMA" => ta.vwma(source1, length1)
+
+rsiLengthInput1 = input.int(5, minval=1, title="RSI Length 1", group="RSI Settings")
+rsiSourceInput1 = input.source(close, "Source 1", group="RSI Settings")
+
+up1 = ta.rma(math.max(ta.change(rsiSourceInput1), 0), rsiLengthInput1)
+down1 = ta.rma(-math.min(ta.change(rsiSourceInput1), 0), rsiLengthInput1)
+rsi1 = down1 == 0 ? 100 : up1 == 0 ? 0 : 100 - (100 / (1 + up1 / down1))
+
+rsiUpperBand1 = hline(85, "RSI Upper Band", color=#787B86)
+hline(50, "RSI Middle Band", color=color.new(#787B86, 50))
+rsiLowerBand1 = hline(25, "RSI Lower Band", color=#787B86)
+
+ma_2(source2, length2, type) =>
+    switch type
+        "SMA" => ta.sma(source2, length2)
+        "EMA" => ta.ema(source2, length2)
+        "SMMA (RMA)" => ta.rma(source2, length2)
+        "WMA" => ta.wma(source2, length2)
+        "VWMA" => ta.vwma(source2, length2)
+
+rsiLengthInput2 = input.int(9, minval=1, title="RSI Length 2", group="RSI Settings")
+rsiSourceInput2 = input.source(close, "Source 2", group="RSI Settings")
+
+up2 = ta.rma(math.max(ta.change(rsiSourceInput2), 0), rsiLengthInput2)
+down2 = ta.rma(-math.min(ta.change(rsiSourceInput2), 0), rsiLengthInput2)
+rsi2 = down2 == 0 ? 100 : up1 == 0 ? 0 : 100 - (100 / (1 + up2 / down2))
+
+ma_3(source3, length3, type) =>
+    switch type
+        "SMA" => ta.sma(source3, length3)
+        "EMA" => ta.ema(source3, length3)
+        "SMMA (RMA)" => ta.rma(source3, length3)
+        "WMA" => ta.wma(source3, length3)
+        "VWMA" => ta.vwma(source3, length3)
+
+rsiLengthInput3 = input.int(13, minval=1, title="RSI Length 3", group="RSI Settings")
+rsiSourceInput3 = input.source(close, "Source 3", group="RSI Settings")
+
+up3 = ta.rma(math.max(ta.change(rsiSourceInput3), 0), rsiLengthInput3)
+down3 = ta.rma(-math.min(ta.change(rsiSourceInput3), 0), rsiLengthInput3)
+rsi3 = down3 == 0 ? 100 : up1 == 0 ? 0 : 100 - (100 / (1 + up3 / down3))
+
+plot(rsi3, "RSI #3", color=#f9ff00, linewidth = 2)
+plot(rsi2, "RSI #2", color=#af00ff, linewidth = 2)
+plot(rsi1, "RSI", color=#00ff20, linewidth = 2)
