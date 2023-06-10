@@ -19,9 +19,9 @@ up1 = ta.rma(math.max(ta.change(rsiSourceInput1), 0), rsiLengthInput1)
 down1 = ta.rma(-math.min(ta.change(rsiSourceInput1), 0), rsiLengthInput1)
 rsi1 = down1 == 0 ? 100 : up1 == 0 ? 0 : 100 - (100 / (1 + up1 / down1))
 
-rsiUpperBand1 = hline(85, "RSI Upper Band", color=#787B86)
+rsiUpperBand1 = hline(85, "RSI Upper Band", color= color.rgb(255,0,0,0))
 hline(50, "RSI Middle Band", color=color.new(#787B86, 50))
-rsiLowerBand1 = hline(25, "RSI Lower Band", color=#787B86)
+rsiLowerBand1 = hline(15, "RSI Lower Band", color=color.rgb(0,255,0,0))
 
 ma_2(source2, length2, type) =>
     switch type
@@ -36,7 +36,7 @@ rsiSourceInput2 = input.source(close, "Source 2", group="RSI Settings")
 
 up2 = ta.rma(math.max(ta.change(rsiSourceInput2), 0), rsiLengthInput2)
 down2 = ta.rma(-math.min(ta.change(rsiSourceInput2), 0), rsiLengthInput2)
-rsi2 = down2 == 0 ? 100 : up1 == 0 ? 0 : 100 - (100 / (1 + up2 / down2))
+rsi2 = down2 == 0 ? 100 : up2 == 0 ? 0 : 100 - (100 / (1 + up2 / down2))
 
 ma_3(source3, length3, type) =>
     switch type
@@ -51,7 +51,7 @@ rsiSourceInput3 = input.source(close, "Source 3", group="RSI Settings")
 
 up3 = ta.rma(math.max(ta.change(rsiSourceInput3), 0), rsiLengthInput3)
 down3 = ta.rma(-math.min(ta.change(rsiSourceInput3), 0), rsiLengthInput3)
-rsi3 = down3 == 0 ? 100 : up1 == 0 ? 0 : 100 - (100 / (1 + up3 / down3))
+rsi3 = down3 == 0 ? 100 : up3 == 0 ? 0 : 100 - (100 / (1 + up3 / down3))
 
 plot(rsi3, "RSI #3", color=#f9ff00, linewidth = 2)
 plot(rsi2, "RSI #2", color=#af00ff, linewidth = 2)
