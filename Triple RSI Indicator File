@@ -5,7 +5,7 @@
 indicator("Triple RSI", overlay = false)
 
 bool _rsiswitch = input.bool(true, "RSI Active?", group = "Switches")
-bool _maswitch = input.bool(true, "MA Active?", group = "Switches")
+bool _maswitch = input.bool(false, "MA Active?", group = "Switches")
 bool _colorfill = input.bool(false, "Color Fill?", group = "Switches")
 bool _darkmode = input.bool(false, "DarkMode?", group = "Switches")
 
@@ -18,7 +18,7 @@ ma_1(source1, length1, type) =>
         "VWMA" => ta.vwma(source1, length1)
 
 //RSI1
-rsiLengthInput1 = input.int(13, title = "RSI: Length 1", minval = 1, maxval = 4999, step = 1)
+rsiLengthInput1 = input.int(5, title = "RSI: Length 1", minval = 1, maxval = 4999, step = 1)
 rsiSourceInput1 = close
 
 up1 = ta.rma(math.max(ta.change(rsiSourceInput1), 0), rsiLengthInput1)
@@ -26,7 +26,7 @@ down1 = ta.rma(-math.min(ta.change(rsiSourceInput1), 0), rsiLengthInput1)
 rsi1 = down1 == 0 ? 100 : up1 == 0 ? 0 : 100 - (100 / (1 + up1 / down1))
 
 //RSI2
-rsiLengthInput2 = input.int(21, title = "RSI: Length 2", minval = 1, maxval = 4999, step = 1)
+rsiLengthInput2 = input.int(8, title = "RSI: Length 2", minval = 1, maxval = 4999, step = 1)
 rsiSourceInput2 = close
 
 up2 = ta.rma(math.max(ta.change(rsiSourceInput2), 0), rsiLengthInput2)
@@ -34,7 +34,7 @@ down2 = ta.rma(-math.min(ta.change(rsiSourceInput2), 0), rsiLengthInput2)
 rsi2 = down2 == 0 ? 100 : up2 == 0 ? 0 : 100 - (100 / (1 + up2 / down2))
 
 //RSI3
-rsiLengthInput3 = input.int(34, title = "RSI: Length 3", minval = 1, maxval = 4999, step = 1)
+rsiLengthInput3 = input.int(13, title = "RSI: Length 3", minval = 1, maxval = 4999, step = 1)
 rsiSourceInput3 = close
 
 up3 = ta.rma(math.max(ta.change(rsiSourceInput3), 0), rsiLengthInput3)
